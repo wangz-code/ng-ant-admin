@@ -1,7 +1,8 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, inject, DestroyRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef, AfterViewInit, ChangeDetectorRef, inject, DestroyRef, input, Input } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 
 import { AntTableConfig, AntTableComponent } from '@shared/components/ant-table/ant-table.component';
 import { PageHeaderType, PageHeaderComponent } from '@shared/components/page-header/page-header.component';
@@ -65,7 +66,8 @@ enum TabEnum {
     NzToolTipModule,
     NzDividerModule,
     NzEmptyModule,
-    AntTableComponent
+    AntTableComponent,
+    FormsModule
   ]
 })
 export class AdvDetailComponent implements OnInit, AfterViewInit {
@@ -73,6 +75,7 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
   @ViewChild('headerContent', { static: false }) headerContent!: TemplateRef<NzSafeAny>;
   @ViewChild('headerFooter', { static: false }) headerFooter!: TemplateRef<NzSafeAny>;
   @ViewChild('highLightTpl', { static: true }) highLightTpl!: TemplateRef<NzSafeAny>;
+  @Input() info = "123"
   stepDirection: 'horizontal' | 'vertical' = 'horizontal';
   returnTableConfig!: AntTableConfig;
   pageHeaderInfo: Partial<PageHeaderType> = {
@@ -85,6 +88,8 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
   tabEnum = TabEnum;
   currentSelTab: number = this.tabEnum.Detail;
   destroyRef = inject(DestroyRef);
+
+
 
   returnDataList: ReturnObj[] = [
     {
@@ -136,6 +141,10 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
+  sayHi():void{
+    alert("hai")
+  }
+
   private initReturnTable(): void {
     this.returnTableConfig = {
       showCheckbox: false,
@@ -175,6 +184,8 @@ export class AdvDetailComponent implements OnInit, AfterViewInit {
       pageIndex: 1
     };
   }
+
+  
 
   ngOnInit(): void {
     this.breakpointObserver

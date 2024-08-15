@@ -71,25 +71,16 @@ export class LoginFormComponent implements OnInit {
           })
           .finally(() => {
             this.spinService.setCurrentGlobalSpinStore(false);
-            this.notification.blank(
-              '温馨提示',
-              `
-                源码地址：<a href="https://github.com/huajian123/ng-antd-admin">在这里</a>
-            `,
-              {
-                nzPlacement: 'top',
-                nzDuration: 0
-              }
-            );
           });
       });
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
+      userName: ["admin", [Validators.required]],
+      password: ["123456", [Validators.required]],
       remember: [null]
     });
+    
   }
 }

@@ -17,6 +17,12 @@
   </nz-radio-group>
   <button nz-button nzType="primary">主操作</button>
 </ng-template>
+  {{info}}
+<input type="text" [(ngModel)]="info">
+@for (item of returnDataList; track $index) {
+  <div (click)="sayHi()">{{ $index }} {{ item.name }}</div>
+}
+
 <ng-template #headerContent>
   <div nz-row>
     <div nz-col [nzLg]="18" [nzMd]="16" [nzSm]="24" [nzXl]="18" [nzXs]="24" [nzXXl]="20">
@@ -142,7 +148,6 @@
     <app-ant-table [tableConfig]="returnTableConfig" [tableData]="returnDataList"></app-ant-table>
   </nz-card>
 </div>
-
 <ng-template #highLightTpl let-code="code">
   <nz-badge nzStatus="processing" nzText="成功"></nz-badge>
   并且{{ code }}
